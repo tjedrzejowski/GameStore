@@ -1,0 +1,34 @@
+GET http://localhost:5099/games
+###
+
+GET http://localhost:5099/games/1
+###
+
+POST http://localhost:5099/games
+Content-Type: application/json
+
+{
+  "title": "Final Fantasy XVI",
+  "genreId": 4,
+  "price": 59.99,
+  "releaseDate": "2023-10-01"
+}
+###
+
+PUT http://localhost:5099/games/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Gothic",
+  "genreId": "3",
+  "releaseDate": "2000-04-30",
+  "price": 29.99
+}
+###
+
+DELETE http://localhost:5099/games/
+###
+
+GET http://localhost:5099/genres/ 
+###
