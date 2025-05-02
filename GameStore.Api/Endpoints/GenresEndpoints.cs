@@ -1,22 +1,15 @@
-using GameStore.Api.Data;
-using GameStore.Api.Mapping;
-using Microsoft.EntityFrameworkCore;
+using GameStore.Api.Services;
 
 namespace GameStore.Api.Endpoints;
 
 public static class GenresEndpoints
 {
+    private const string GenresGroupName = "genres";
     public static RouteGroupBuilder MapGenresEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("genres");
+        var group = app.MapGroup(GenresGroupName);
 
-        group.MapGet("/", async (GameStoreContext databaseContext) =>
-            await databaseContext.Genres
-                .Select(item => item.ToDto())
-                .AsNoTracking()
-                .ToListAsync()
-
-        );
+        group.MapGet("/", async (IGenreService service) => await service.GetAll());
 
         return group;
     }

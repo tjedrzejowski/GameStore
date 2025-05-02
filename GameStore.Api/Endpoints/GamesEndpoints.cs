@@ -6,11 +6,12 @@ namespace GameStore.Api.Endpoints;
 
 public static class GamesEndpoints
 {
-    const string GetGameEndpointName = "GetGame";
+    private const string GetGameEndpointName = "GetGame";
+    private const string GamesGroupName = "games";
 
     public static RouteGroupBuilder MapGamesEndpoints(this WebApplication app)
     {
-        var group = app.MapGroup("games");
+        var group = app.MapGroup(GamesGroupName);
 
         group.MapGet("/", async (IGameService service) =>
         {

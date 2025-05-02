@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:5099/games/
+DELETE http://localhost:5099/games/6
 ###
 
 GET http://localhost:5099/genres/ 
