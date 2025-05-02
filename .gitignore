@@ -1,3 +1,7 @@
+# =====================
+# 🔷 Wspólne ustawienia
+# =====================
+
 # Build results
 bin/
 obj/
@@ -20,7 +24,7 @@ project.fragment.lock.json
 artifacts/
 *.log
 
-# Visual Studio Code settings (optional)
+# Visual Studio Code settings
 .history/
 .env
 
@@ -36,4 +40,55 @@ Thumbs.db
 
 # Publish output
 publish/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node (for npm/yarn-based tooling in Blazor or JS interop)
+node_modules/
+package-lock.json
+yarn.lock
+
+# ===========================
+# 🟦 ASP.NET Core / backend
+# ===========================
+
+# ASP.NET hosting files
+wwwroot/
+
+# User secrets
+**/secrets.json
+
+# EF Core Migrations cache
+Migrations/
+
+# App settings (optional, jeśli masz prywatne dane)
+appsettings.Development.json
+
+# Dotnet user tools
+tools/
+
+# ===============================
+# 🟨 Blazor WebAssembly / frontend
+# ===============================
+
+# Framework cache (auto-downloaded by Blazor)
+**/wwwroot/_framework/
+**/wwwroot/_content/
+
+# Blazor static asset cache
+**/obj/Release/net*/scopedcss/
+
+# Razor Component compilation artifacts
+**/obj/**/*.g.cs
+**/obj/**/*.g.i.cs
+**/obj/**/*.razor.g.cs
+**/obj/**/*.razor.g.i.cs
+**/obj/**/*.staticwebassets.runtime.json
+
+# Blazor publish artifacts
+**/dist/
+**/build/
+
 
