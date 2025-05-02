@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("GameStore");
 builder.Services.AddSqlite<GameStoreContext>(connectionString);
-builder.Services.AddScoped<IGameService>();
+builder.Services.AddScoped<IGameService, GameService>();
 
 builder.Services.AddTransient<IValidator<CreateGameDto>, CreateGameDtoValidator>();
 builder.Services.AddTransient<IValidator<UpdateGameDto>, UpdateGameDtoValidator>();
