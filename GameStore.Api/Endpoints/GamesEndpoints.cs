@@ -1,3 +1,4 @@
+using FluentValidation;
 using GameStore.Api.Contracts;
 using GameStore.Api.Data;
 using GameStore.Api.Entities;
@@ -34,8 +35,14 @@ public static class GamesEndpoints
         .WithName(GetGameEndpointName);
 
         // crud create
-        group.MapPost("/", async (CreateGameDto newGame, GameStoreContext databaseContext) =>
+        group.MapPost("/", async (CreateGameDto newGame, GameStoreContext databaseContext, IValidator<CreateGameDto> validator) =>
         {
+            var validationResult = await validator.ValidateAsync(newGame);
+            if (!validationResult.IsValid)
+            {
+                return Results.ValidationProblem(validationResult.ToDictionary());
+            }
+
             Game game = newGame.ToEntity();
             game.Genre = databaseContext.Genres.Find(newGame.GenreId);
 
@@ -46,8 +53,14 @@ public static class GamesEndpoints
         });
 
         //crud update
-        group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, GameStoreContext databaseContext) =>
+        group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, GameStoreContext databaseContext, IValidator<UpdateGameDto> validator) =>
         {
+            var validationResult = await validator.ValidateAsync(updatedGame);
+            if (!validationResult.IsValid)
+            {
+                return Results.ValidationProblem(validationResult.ToDictionary());
+            }
+
             var game = await databaseContext.Games.FindAsync(id);
             if (game is null)
             {

@@ -8,22 +8,22 @@ POST http://localhost:5099/games
 Content-Type: application/json
 
 {
-  "title": "Final Fantasy XVI",
+  "title": "Final Fantasy VII",
   "genreId": 4,
   "price": 59.99,
-  "releaseDate": "2023-10-01"
+  "releaseDate": "1990-11-02"
 }
 ###
 
-PUT http://localhost:5099/games/1
+PUT http://localhost:5099/games/3
 Content-Type: application/json
 
 {
   "id": 1,
-  "title": "Gothic",
-  "genreId": "3",
-  "releaseDate": "2000-04-30",
-  "price": 29.99
+  "title": "Gothic II Noc Kruka",
+  "genreId": "0",
+  "releaseDate": "2026-04-30",
+  "price": -29.99
 }
 ###
 

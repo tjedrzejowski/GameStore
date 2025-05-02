@@ -126,3 +126,8 @@
 /home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/bin/Debug/net8.0/runtimes/win-x86/native/e_sqlite3.dll
 /home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/obj/Debug/net8.0/GameStore.Api.csproj.AssemblyReference.cache
 /home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/obj/Debug/net8.0/GameStor.5118A84D.Up2Date
+/home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/obj/Debug/net8.0/GameStore.Api.MvcApplicationPartsAssemblyInfo.cs
+/home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/obj/Debug/net8.0/GameStore.Api.sourcelink.json
+/home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/bin/Debug/net8.0/FluentValidation.dll
+/home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/bin/Debug/net8.0/FluentValidation.AspNetCore.dll
+/home/tomaszjedrzejowski/Repositories/GameStore/GameStore.Api/bin/Debug/net8.0/FluentValidation.DependencyInjectionExtensions.dll
