@@ -1,9 +1,6 @@
 using FluentValidation;
 using GameStore.Api.Contracts;
-using GameStore.Api.Data;
-using GameStore.Api.Entities;
-using GameStore.Api.Mapping;
-using Microsoft.EntityFrameworkCore;
+using GameStore.Api.Services;
 
 namespace GameStore.Api.Endpoints;
 
@@ -15,27 +12,20 @@ public static class GamesEndpoints
     {
         var group = app.MapGroup("games");
 
-        // crud read
-        group.MapGet("/", async (GameStoreContext databaseContext) =>
+        group.MapGet("/", async (IGameService service) =>
         {
-            var games = await databaseContext.Games
-                .Include(item => item.Genre)
-                .Select(item => item.ToGameSummaryDto())
-                .AsNoTracking()
-                .ToListAsync();
-
+            var games = await service.GetAllAsync();
             return Results.Ok(games);
         });
 
-        group.MapGet("/{id}", async (int id, GameStoreContext databaseContext) =>
+        group.MapGet("/{id}", async (int id, IGameService service) =>
         {
-            Game? game = await databaseContext.Games.FindAsync(id);
-            return game is not null ? Results.Ok(game.ToGameDetailsDto()) : Results.NotFound();
+            var game = await service.GetByIdAsync(id);
+            return game is not null ? Results.Ok(game) : Results.NotFound();
         })
         .WithName(GetGameEndpointName);
 
-        // crud create
-        group.MapPost("/", async (CreateGameDto newGame, GameStoreContext databaseContext, IValidator<CreateGameDto> validator) =>
+        group.MapPost("/", async (CreateGameDto newGame, IGameService service, IValidator<CreateGameDto> validator) =>
         {
             var validationResult = await validator.ValidateAsync(newGame);
             if (!validationResult.IsValid)
@@ -43,17 +33,11 @@ public static class GamesEndpoints
                 return Results.ValidationProblem(validationResult.ToDictionary());
             }
 
-            Game game = newGame.ToEntity();
-            game.Genre = databaseContext.Genres.Find(newGame.GenreId);
-
-            databaseContext.Games.Add(game);
-            await databaseContext.SaveChangesAsync();
-
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToGameSummaryDto());
+            var game = await service.CreateAsync(newGame);
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game);
         });
 
-        //crud update
-        group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, GameStoreContext databaseContext, IValidator<UpdateGameDto> validator) =>
+        group.MapPut("/{id}", async (int id, UpdateGameDto updatedGame, IGameService service, IValidator<UpdateGameDto> validator) =>
         {
             var validationResult = await validator.ValidateAsync(updatedGame);
             if (!validationResult.IsValid)
@@ -61,29 +45,13 @@ public static class GamesEndpoints
                 return Results.ValidationProblem(validationResult.ToDictionary());
             }
 
-            var game = await databaseContext.Games.FindAsync(id);
-            if (game is null)
-            {
-                // this is one way of returning result when failed to found resource
-                // second option is to create new resource with given data and put it under this id
-                // REST dont define what is better behaviour in that case - both are available.
-                return Results.NotFound();
-            }
-
-            databaseContext.Entry(game)
-                .CurrentValues
-                .SetValues(updatedGame.ToEntity(id));
-            await databaseContext.SaveChangesAsync();
-
-            return Results.NoContent();
+            var uppdateSucceeded = await service.UpdateAsync(id, updatedGame);
+            return uppdateSucceeded ? Results.NoContent() : Results.NotFound();
         });
 
-        //crud delete
-        group.MapDelete("/{id}", async (int id, GameStoreContext databaseContext) =>
+        group.MapDelete("/{id}", async (int id, IGameService service) =>
         {
-            await databaseContext.Games
-                .Where(item => item.Id == id)
-                .ExecuteDeleteAsync();
+            await service.DeleteAsync(id);
             return Results.NoContent();
         });
 
