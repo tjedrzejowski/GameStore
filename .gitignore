@@ -1,1 +1,39 @@
-GameStore.Api/GameStore.db
+# Build results
+bin/
+obj/
+
+# User-specific files
+.vscode/
+*.user
+*.suo
+
+# Runtime files
+*.db
+*.sqlite
+
+# EF Core snapshot artifacts (optional, keep if needed)
+**/*Snapshot.cs
+
+# Dotnet-specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.log
+
+# Visual Studio Code settings (optional)
+.history/
+.env
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Rider IDE (if someone uses it)
+.idea/
+
+# Logs
+*.log
+
+# Publish output
+publish/
+
