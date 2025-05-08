@@ -2,7 +2,7 @@ using GameStore.Web.Models;
 
 namespace GameStore.Web.Clients;
 
-public class GameClients
+public class GamesClient
 {
     private readonly List<GameSummary> games = [
         new(){Id = 1, Name = "Mock Game I", Genre = "Fighting", Price = 49.99M, ReleaseDate = new DateTime(1992, 7, 15)},
