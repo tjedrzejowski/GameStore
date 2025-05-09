@@ -1,6 +1,4 @@
 ﻿@page "/"
-@using Models
-@using Clients
 
 <PageTitle>Game Cataloge</PageTitle>
 
@@ -35,7 +33,7 @@ else
 }
 
 @code {
-    private GameClients client = new();
+    private GamesClient client = new();
     private GameSummary[]? games;
 
     protected override void OnInitialized()
