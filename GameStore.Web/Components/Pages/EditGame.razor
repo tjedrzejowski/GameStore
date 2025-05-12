@@ -11,7 +11,7 @@ else
 {
     <div class="row">
         <div class="col-md-4">
-            <EditForm Model="Game" FormName="editGame" OnSubmit="HandleSubmit">
+            <EditForm Model="Game" FormName="editGame" OnValidSubmit="HandleSubmit">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
                     <InputText id="name" @bind-Value="Game.Name" class="form-control" />
