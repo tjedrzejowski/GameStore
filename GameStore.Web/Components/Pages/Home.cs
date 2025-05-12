@@ -1,4 +1,4 @@
-using GameStore.Web.Clients;
+using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 using Microsoft.AspNetCore.Components;
 
@@ -6,11 +6,11 @@ namespace GameStore.Web.Components.Pages;
 
 public partial class Home : ComponentBase
 {
-    private GamesClient client = new();
+    [Inject] public IGamesClient Client { get; set; } = default!;
     private GameSummary[]? games;
 
     protected override void OnInitialized()
     {
-        games = client.GetGames();
+        games = Client.GetGames();
     }
 }
