@@ -20,11 +20,14 @@ public class GamesClient : IGamesClient
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(game.GenreId);
 
+        var genre = genres.SingleOrDefault(item => item.Id == int.Parse(game.GenreId));
+        ArgumentNullException.ThrowIfNull(genre);
+
         var summary = new GameSummary
         {
             Id = games.Count() + 1,
             Name = game.Name,
-            Genre = genres.Single(item => item.Id == int.Parse(game.GenreId)).Name,
+            Genre = genre.Name,
             Price = game.Price,
             ReleaseDate = game.ReleaseDate
         };
