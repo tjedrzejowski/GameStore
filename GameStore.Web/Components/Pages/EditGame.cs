@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using GameStore.Web.Clients;
+using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -11,6 +12,8 @@ public partial class EditGame : ComponentBase
     private const string ROOT = "/";
 
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private IGenresClient GenresClient { get; set; } = default!;
+    [Inject] private IGamesClient GamesClient { get; set; } = default!;
 
     [SupplyParameterFromForm]
     public GameDetails Game { get; set; } = new()
@@ -20,17 +23,15 @@ public partial class EditGame : ComponentBase
     };
 
     private Genre[]? _genres;
-    private readonly GenresClient _genresClient = new();
-    private readonly GamesClient _gamesClient = new();
 
     protected override void OnInitialized()
     {
-        _genres = _genresClient.GetGenres();
+        _genres = GenresClient.GetGenres();
     }
 
     private void HandleSubmit()
     {
-        _gamesClient.AddGame(Game);
+        GamesClient.AddGame(Game);
         NavigationManager.NavigateTo(ROOT);
     }
 

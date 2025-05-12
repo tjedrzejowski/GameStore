@@ -1,9 +1,11 @@
+using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 
 namespace GameStore.Web.Clients;
 
-public class GamesClient
+public class GamesClient : IGamesClient
 {
+    // tempororary before connecting with api
     private readonly Genre[] genres = new GenresClient().GetGenres();
 
     private readonly List<GameSummary> games = [
@@ -26,5 +28,7 @@ public class GamesClient
             Price = game.Price,
             ReleaseDate = game.ReleaseDate
         };
+
+        games.Add(summary);
     }
 }

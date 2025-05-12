@@ -1,8 +1,9 @@
+using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 
 namespace GameStore.Web.Clients;
 
-public class GenresClient
+public class GenresClient : IGenresClient
 {
     private readonly Genre[] genres = [
 
