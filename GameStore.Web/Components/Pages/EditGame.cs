@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using GameStore.Web.Clients;
 using GameStore.Web.Models;
 using Microsoft.AspNetCore.Components;
@@ -33,7 +34,7 @@ public partial class EditGame : ComponentBase
             <InputText id="name" @bind-Value="_game.Name" class="form-control" />
         </div>
      */
-    private RenderFragment RenderInputText(string id, string label, string value) =>
+    private RenderFragment RenderInputText(string id, string label, string value, EventCallback<string> valueChanged, Expression<Func<string>> valueExpression) =>
         builder =>
         {
             //<div class="mb-3">
@@ -51,6 +52,8 @@ public partial class EditGame : ComponentBase
             builder.AddAttribute(6, "id", id);
             builder.AddAttribute(7, "class", "form-control");
             builder.AddAttribute(8, "bind-Value", value);
+            builder.AddAttribute(9, "ValueChanged", valueChanged);
+            builder.AddAttribute(10, "ValueExpression", valueExpression);
             builder.CloseComponent();
 
             // </div>

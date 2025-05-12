@@ -16,7 +16,7 @@ else
                     <label for="name" class="form-label">Name:</label>
                     <InputText id="name" @bind-Value="_game.Name" class="form-control" />
                 </div> *@
-                @RenderInputText("name", "Name:", _game.Name)
+                @RenderInputText("name", "Name:", _game.Name, EventCallback.Factory.Create<string>(this, val => _game.Name = val), () => _game.Name)
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre:</label>
                     <InputSelect id="genre" @bind-Value="_game.GenreId" class="form-select">
