@@ -11,15 +11,14 @@ else
 {
     <div class="row">
         <div class="col-md-4">
-            <EditForm Model="@_game" FormName="editGame" OnSubmit="HandleSubmit">
-                @* <div class="mb-3">
+            <EditForm Model="Game" FormName="editGame" OnSubmit="HandleSubmit">
+                <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
-                    <InputText id="name" @bind-Value="_game.Name" class="form-control" />
-                </div> *@
-                @RenderInputText("name", "Name:", _game.Name, EventCallback.Factory.Create<string>(this, val => _game.Name = val), () => _game.Name)
+                    <InputText id="name" @bind-Value="Game.Name" class="form-control" />
+                </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre:</label>
-                    <InputSelect id="genre" @bind-Value="_game.GenreId" class="form-select">
+                    <InputSelect id="genre" @bind-Value="Game.GenreId" class="form-select">
                         <option value="">Select a genre</option>
                         @foreach (var item in _genres)
                         {
@@ -29,11 +28,11 @@ else
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price:</label>
-                    <InputNumber id="price" @bind-Value="_game.Price" class="form-control" />
+                    <InputNumber id="price" @bind-Value="Game.Price" class="form-control" />
                 </div>
                 <div class="mb-3">
                     <label for="releaseDate" class="form-label">ReleaseDate:</label>
-                    <InputDate id="releaseDate" @bind-Value="_game.ReleaseDate" class="form-control" />
+                    <InputDate id="releaseDate" @bind-Value="Game.ReleaseDate" class="form-control" />
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </EditForm>

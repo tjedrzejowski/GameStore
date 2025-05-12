@@ -12,11 +12,13 @@ public partial class EditGame : ComponentBase
     private readonly GenresClient _genresClient = new();
     private readonly GamesClient _gamesClient = new();
 
-    private GameDetails _game = new()
+    [SupplyParameterFromForm]
+    public GameDetails Game { get; set; } = new()
     {
         Name = string.Empty,
         ReleaseDate = DateTime.UtcNow
     };
+
 
     protected override void OnInitialized()
     {
@@ -25,7 +27,7 @@ public partial class EditGame : ComponentBase
 
     private void HandleSubmit()
     {
-        _gamesClient.AddGame(_game);
+        _gamesClient.AddGame(Game);
     }
 
     /*
