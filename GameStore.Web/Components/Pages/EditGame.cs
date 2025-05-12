@@ -8,9 +8,9 @@ namespace GameStore.Web.Components.Pages;
 
 public partial class EditGame : ComponentBase
 {
-    private Genre[]? _genres;
-    private readonly GenresClient _genresClient = new();
-    private readonly GamesClient _gamesClient = new();
+    private const string ROOT = "/";
+
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
     [SupplyParameterFromForm]
     public GameDetails Game { get; set; } = new()
@@ -19,6 +19,9 @@ public partial class EditGame : ComponentBase
         ReleaseDate = DateTime.UtcNow
     };
 
+    private Genre[]? _genres;
+    private readonly GenresClient _genresClient = new();
+    private readonly GamesClient _gamesClient = new();
 
     protected override void OnInitialized()
     {
@@ -28,6 +31,7 @@ public partial class EditGame : ComponentBase
     private void HandleSubmit()
     {
         _gamesClient.AddGame(Game);
+        NavigationManager.NavigateTo(ROOT);
     }
 
     /*
