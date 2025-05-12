@@ -39,26 +39,3 @@ else
         </div>
     </div>
 }
-
-@code {
-    private Genre[]? _genres;
-    private GenresClient _genresClient = new();
-    private GamesClient _gamesClient = new();
-
-    [SupplyParameterFromForm]
-    private GameDetails _game { get; set; } = new()
-    {
-        Name = string.Empty,
-        ReleaseDate = DateTime.UtcNow
-    };
-
-    protected override void OnInitialized()
-    {
-        _genres = _genresClient.GetGenres();
-    }
-
-    private void HandleSubmit()
-    {
-        _gamesClient.AddGame(_game);
-    }
-}
