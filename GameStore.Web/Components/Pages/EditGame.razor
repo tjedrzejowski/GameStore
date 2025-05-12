@@ -12,10 +12,11 @@ else
     <div class="row">
         <div class="col-md-4">
             <EditForm Model="@_game" FormName="editGame" OnSubmit="HandleSubmit">
-                <div class="mb-3">
+                @* <div class="mb-3">
                     <label for="name" class="form-label">Name:</label>
                     <InputText id="name" @bind-Value="_game.Name" class="form-control" />
-                </div>
+                </div> *@
+                @RenderInputText("name", "Name:", _game.Name)
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre:</label>
                     <InputSelect id="genre" @bind-Value="_game.GenreId" class="form-select">
