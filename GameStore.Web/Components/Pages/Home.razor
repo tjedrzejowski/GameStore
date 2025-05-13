@@ -30,6 +30,11 @@ else
                     <td>@game.Genre</td>
                     <td class="text-end">@game.Price.ToString("C2")</td>
                     <td>@DateOnly.FromDateTime(game.ReleaseDate)</td>
+                    <th>
+                        <a class="btn btn-primary me-2" role="button" href="@GameUrl(game.Id)">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </th>
                 </tr>
             }
         </tbody>

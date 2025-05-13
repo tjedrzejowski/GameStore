@@ -13,4 +13,6 @@ public partial class Home : ComponentBase
     {
         games = Client.GetGames();
     }
+
+    private static string GameUrl(int id) => $"/editgame/{id}";
 }
