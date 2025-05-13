@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 using Microsoft.AspNetCore.Components;
@@ -24,9 +25,9 @@ public partial class DeleteGame : ComponentBase
         return $"deleteModal:{gameSummary.Id}";
     }
 
-    private void Confirm()
+    private async Task ConfirmAsync()
     {
-        GamesClient.DeleteGame(Game!.Id);
+        await GamesClient.DeleteGameAsync(Game!.Id);
         NavigationManager.Refresh();
     }
 }

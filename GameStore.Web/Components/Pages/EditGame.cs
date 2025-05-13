@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 using Microsoft.AspNetCore.Components;
@@ -23,7 +24,7 @@ public partial class EditGame : ComponentBase
     private Genre[]? _genres;
     private string _title = string.Empty;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         if (Game is not null)
         {
@@ -32,7 +33,7 @@ public partial class EditGame : ComponentBase
 
         if (Id is not null)
         {
-            Game = GamesClient.GetGame(Id.Value);
+            Game = await GamesClient.GetGameAsync(Id.Value);
             _title = $"Edit {Game.Title}";
         }
         else
@@ -52,18 +53,18 @@ public partial class EditGame : ComponentBase
         _genres = GenresClient.GetGenres();
     }
 
-    private void HandleSubmit()
+    private async Task HandleSubmitAsync()
     {
         ArgumentNullException.ThrowIfNull(Game);
 
         if (Id is null)
         {
-            GamesClient.AddGame(Game);
+            await GamesClient.AddGameAsync(Game);
         }
         else
         {
             Game.Id = Id.Value;
-            GamesClient.UpdateGame(Game);
+            await GamesClient.UpdateGameAsync(Game);
         }
         NavigationManager.NavigateTo(ROOT);
     }
