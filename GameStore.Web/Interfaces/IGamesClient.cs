@@ -6,7 +6,7 @@ public interface IGamesClient
 {
     void AddGame(GameDetails newGame);
     void UpdateGame(GameDetails pdatedGame);
-    GameSummary[] GetGames();
+    Task<GameSummary[]> GetGamesAsync();
     GameDetails GetGame(int id);
     void DeleteGame(int id);
 }

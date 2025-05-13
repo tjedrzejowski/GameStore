@@ -8,7 +8,7 @@ public class GameDetails
 
     [Required]
     [StringLength(50)]
-    public required string Name { get; set; }
+    public required string Title { get; set; }
 
     [Required(ErrorMessage = "The Genre is required.")]
     public string? GenreId { get; set; }

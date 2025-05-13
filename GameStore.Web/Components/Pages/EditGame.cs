@@ -33,13 +33,13 @@ public partial class EditGame : ComponentBase
         if (Id is not null)
         {
             Game = GamesClient.GetGame(Id.Value);
-            _title = $"Edit {Game.Name}";
+            _title = $"Edit {Game.Title}";
         }
         else
         {
             Game = new()
             {
-                Name = string.Empty,
+                Title = string.Empty,
                 ReleaseDate = DateTime.UtcNow
             };
 

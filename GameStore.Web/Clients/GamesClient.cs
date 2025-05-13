@@ -1,17 +1,18 @@
+using System.Threading.Tasks;
 using GameStore.Web.Interfaces;
 using GameStore.Web.Models;
 
 namespace GameStore.Web.Clients;
 
-public class GamesClient : IGamesClient
+public class GamesClient(HttpClient httpClient) : IGamesClient
 {
     // tempororary before connecting with api
-    private readonly Genre[] genres = new GenresClient().GetGenres();
+    private readonly Genre[] genres = new GenresClient(httpClient).GetGenres();
 
     private readonly List<GameSummary> games = [
-        new(){Id = 1, Name = "Mock Game I", Genre = "Action", Price = 49.99M, ReleaseDate = new DateTime(1992, 7, 15)},
-        new(){Id = 2, Name = "Mock Game II", Genre = "Role-Playing (RPG)", Price = 19.99M, ReleaseDate = new DateTime(2002, 8, 19)},
-        new(){Id = 3, Name = "Mock Game III", Genre = "Racing", Price = 9.99M, ReleaseDate = new DateTime(2021, 4, 1)}
+        new(){Id = 1, Title = "Mock Game I", Genre = "Action", Price = 49.99M, ReleaseDate = new DateTime(1992, 7, 15)},
+        new(){Id = 2, Title = "Mock Game II", Genre = "Role-Playing (RPG)", Price = 19.99M, ReleaseDate = new DateTime(2002, 8, 19)},
+        new(){Id = 3, Title = "Mock Game III", Genre = "Racing", Price = 9.99M, ReleaseDate = new DateTime(2021, 4, 1)}
    ];
 
     public void AddGame(GameDetails newGame)
@@ -21,7 +22,7 @@ public class GamesClient : IGamesClient
         var summary = new GameSummary
         {
             Id = games.Count() + 1,
-            Name = newGame.Name,
+            Title = newGame.Title,
             Genre = genre!.Name,
             Price = newGame.Price,
             ReleaseDate = newGame.ReleaseDate
@@ -34,13 +35,13 @@ public class GamesClient : IGamesClient
     {
         var existingGame = GetGameSummaryById(updatedGame.Id);
 
-        existingGame.Name = updatedGame.Name;
+        existingGame.Title = updatedGame.Title;
         existingGame.Genre = GetGenreById(updatedGame.GenreId)!.Name;
         existingGame.Price = updatedGame.Price;
         existingGame.ReleaseDate = updatedGame.ReleaseDate;
     }
 
-    public GameSummary[] GetGames() => games.ToArray();
+    public async Task<GameSummary[]> GetGamesAsync() => await httpClient.GetFromJsonAsync<GameSummary[]>("games") ?? Array.Empty<GameSummary>();
 
     public GameDetails GetGame(int id)
     {
@@ -50,7 +51,7 @@ public class GamesClient : IGamesClient
         return new GameDetails()
         {
             Id = game.Id,
-            Name = game.Name,
+            Title = game.Title,
             GenreId = genre.Id.ToString(),
             Price = game.Price,
             ReleaseDate = game.ReleaseDate

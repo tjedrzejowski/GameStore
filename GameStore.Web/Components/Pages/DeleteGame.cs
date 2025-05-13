@@ -15,7 +15,7 @@ public partial class DeleteGame : ComponentBase
 
     protected override void OnParametersSet()
     {
-        _title = $"Delete {Game!.Name}";
+        _title = $"Delete {Game!.Title}";
     }
 
     public static string GetModalId(GameSummary? gameSummary)

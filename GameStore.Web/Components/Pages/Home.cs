@@ -9,9 +9,9 @@ public partial class Home : ComponentBase
     [Inject] public IGamesClient Client { get; set; } = default!;
     private GameSummary[]? games;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        games = Client.GetGames();
+        games = await Client.GetGamesAsync();
     }
 
     private static string GameUrl(int id) => $"/editgame/{id}";

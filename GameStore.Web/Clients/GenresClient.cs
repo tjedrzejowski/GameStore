@@ -3,7 +3,7 @@ using GameStore.Web.Models;
 
 namespace GameStore.Web.Clients;
 
-public class GenresClient : IGenresClient
+public class GenresClient(HttpClient httpClient) : IGenresClient
 {
     private readonly Genre[] genres = [
 
