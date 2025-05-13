@@ -22,7 +22,7 @@ public class GamesClient : IGamesClient
         {
             Id = games.Count() + 1,
             Name = newGame.Name,
-            Genre = genre.Name,
+            Genre = genre!.Name,
             Price = newGame.Price,
             ReleaseDate = newGame.ReleaseDate
         };
