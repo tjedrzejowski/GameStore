@@ -57,6 +57,12 @@ public class GamesClient : IGamesClient
         };
     }
 
+    public void DeleteGame(int id)
+    {
+        var game = GetGameSummaryById(id);
+        games.Remove(game);
+    }
+
     private GameSummary GetGameSummaryById(int id)
     {
         var game = games.Find(item => item.Id == id);

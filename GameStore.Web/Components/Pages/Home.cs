@@ -15,4 +15,9 @@ public partial class Home : ComponentBase
     }
 
     private static string GameUrl(int id) => $"/editgame/{id}";
+
+    private string GetDeleteModalId(GameSummary game)
+    {
+        return $"#{DeleteGame.GetModalId(game)}";
+    }
 }

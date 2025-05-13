@@ -8,4 +8,5 @@ public interface IGamesClient
     void UpdateGame(GameDetails pdatedGame);
     GameSummary[] GetGames();
     GameDetails GetGame(int id);
+    void DeleteGame(int id);
 }
