@@ -4,5 +4,5 @@ namespace GameStore.Web.Interfaces;
 
 public interface IGenresClient
 {
-    Genre[] GetGenres();
+    Task<Genre[]> GetGenresAsync();
 }

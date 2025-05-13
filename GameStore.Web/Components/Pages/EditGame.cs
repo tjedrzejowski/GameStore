@@ -48,9 +48,9 @@ public partial class EditGame : ComponentBase
         }
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        _genres = GenresClient.GetGenres();
+        _genres = await GenresClient.GetGenresAsync();
     }
 
     private async Task HandleSubmitAsync()
