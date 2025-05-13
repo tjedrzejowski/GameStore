@@ -1,9 +1,10 @@
 @page "/editgame"
+@page "/editgame/{id:int}"
 
-<PageTitle>New Game</PageTitle>
-<h3>New Game</h3>
+<PageTitle>@_title</PageTitle>
+<h3>@_title</h3>
 
-@if (_genres is null)
+@if (_genres is null || Game is null)
 {
     <p><em>Loading...</em></p>
 }

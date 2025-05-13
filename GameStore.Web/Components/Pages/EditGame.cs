@@ -14,14 +14,38 @@ public partial class EditGame : ComponentBase
     [Inject] private IGenresClient GenresClient { get; set; } = default!;
     [Inject] private IGamesClient GamesClient { get; set; } = default!;
 
+    [Parameter]
+    public int? Id { get; set; }
+
     [SupplyParameterFromForm]
-    public GameDetails Game { get; set; } = new()
-    {
-        Name = string.Empty,
-        ReleaseDate = DateTime.UtcNow
-    };
+    public GameDetails Game { get; set; } = default!;
 
     private Genre[]? _genres;
+    private string _title = string.Empty;
+
+    protected override void OnParametersSet()
+    {
+        if (Game is not null)
+        {
+            return;
+        }
+
+        if (Id is not null)
+        {
+            Game = GamesClient.GetGame(Id.Value);
+            _title = $"Edit {Game.Name}";
+        }
+        else
+        {
+            Game = new()
+            {
+                Name = string.Empty,
+                ReleaseDate = DateTime.UtcNow
+            };
+
+            _title = $"New Game";
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -30,10 +54,21 @@ public partial class EditGame : ComponentBase
 
     private void HandleSubmit()
     {
-        GamesClient.AddGame(Game);
+        ArgumentNullException.ThrowIfNull(Game);
+
+        if (Id is null)
+        {
+            GamesClient.AddGame(Game);
+        }
+        else
+        {
+            Game.Id = Id.Value;
+            GamesClient.UpdateGame(Game);
+        }
         NavigationManager.NavigateTo(ROOT);
     }
 
+    #region Rendering
     /*
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
@@ -65,4 +100,5 @@ public partial class EditGame : ComponentBase
             // </div>
             builder.CloseElement();
         };
+    #endregion
 }
