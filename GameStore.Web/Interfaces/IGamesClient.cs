@@ -4,9 +4,9 @@ namespace GameStore.Web.Interfaces;
 
 public interface IGamesClient
 {
-    void AddGame(GameDetails newGame);
-    void UpdateGame(GameDetails pdatedGame);
+    Task AddGameAsync(GameDetails newGame);
+    Task UpdateGameAsync(GameDetails updatedGame);
     Task<GameSummary[]> GetGamesAsync();
-    GameDetails GetGame(int id);
-    void DeleteGame(int id);
+    Task<GameDetails> GetGameAsync(int id);
+    Task DeleteGameAsync(int id);
 }
