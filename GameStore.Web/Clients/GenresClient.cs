@@ -5,5 +5,5 @@ namespace GameStore.Web.Clients;
 
 public class GenresClient(HttpClient httpClient) : IGenresClient
 {
-    public async Task<Genre[]> GetGenresAsync() => await httpClient.GetFromJsonAsync<Genre[]>("genre") ?? Array.Empty<Genre>();
+    public async Task<Genre[]> GetGenresAsync() => await httpClient.GetFromJsonAsync<Genre[]>("genres") ?? Array.Empty<Genre>();
 }
