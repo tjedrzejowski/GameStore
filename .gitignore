@@ -45,6 +45,21 @@ publish/
 *.tmp
 *.temp
 
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.cache
+*.log
+*.vspscc
+*.vssscc
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.deps.json
+*.targets
+*.props
+
 # Node (for npm/yarn-based tooling in Blazor or JS interop)
 node_modules/
 package-lock.json
