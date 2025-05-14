@@ -4,6 +4,7 @@ using GameStore.Api.Data;
 using GameStore.Api.Endpoints;
 using GameStore.Api.Services;
 using GameStore.Api.Validators;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +12,8 @@ var connectionString = builder.Configuration.GetConnectionString("GameStore");
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSqlite<GameStoreContext>(connectionString);
+builder.Services.AddNpgsql<GameStoreContext>(connectionString);
+
 builder.Services.AddScoped<IGameService, GameService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
 
