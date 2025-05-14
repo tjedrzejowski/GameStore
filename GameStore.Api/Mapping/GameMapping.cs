@@ -10,7 +10,7 @@ public static class GameMapping
         Title = gameDto.Title,
         GenreId = gameDto.GenreId,
         Price = gameDto.Price,
-        ReleaseDate = gameDto.ReleaseDate
+        ReleaseDate = gameDto.ReleaseDate.ToUniversalTime()
     };
 
     public static Game ToEntity(this UpdateGameDto gameDto, int id) => new()
@@ -19,7 +19,7 @@ public static class GameMapping
         Title = gameDto.Title,
         GenreId = gameDto.GenreId,
         Price = gameDto.Price,
-        ReleaseDate = gameDto.ReleaseDate
+        ReleaseDate = gameDto.ReleaseDate.ToUniversalTime()
     };
 
     public static GameSummaryDto ToGameSummaryDto(this Game game) => new(
