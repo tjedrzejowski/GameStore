@@ -18,6 +18,6 @@ public class UpdateGameDtoValidator : AbstractValidator<UpdateGameDto>
             .InclusiveBetween(0, 1000).WithMessage("Price must be between 0 and 1000.");
 
         RuleFor(x => x.ReleaseDate)
-            .LessThanOrEqualTo(DateTime.Today).WithMessage("Release date cannot be in the future.");
+            .LessThanOrEqualTo(DateTime.UtcNow).WithMessage("Release date cannot be in the future.");
     }
 }
