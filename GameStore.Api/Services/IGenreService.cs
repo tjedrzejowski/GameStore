@@ -4,5 +4,5 @@ namespace GameStore.Api.Services;
 
 public interface IGenreService
 {
-    Task<IEnumerable<GenreDto>> GetAll();
+    Task<IEnumerable<GenreDto>> GetAllAsync();
 }

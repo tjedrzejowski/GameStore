@@ -7,7 +7,7 @@ namespace GameStore.Api.Services;
 
 public class GenreService(GameStoreContext databaseContext) : IGenreService
 {
-    public async Task<IEnumerable<GenreDto>> GetAll()
+    public async Task<IEnumerable<GenreDto>> GetAllAsync()
     {
         return await databaseContext.Genres
             .Select(item => item.ToDto())

@@ -1,7 +1,6 @@
 using FluentValidation;
 using GameStore.Api.Contracts;
 using GameStore.Api.Data;
-using GameStore.Api.Endpoints;
 using GameStore.Api.Services;
 using GameStore.Api.Validators;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +30,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
-app.MapGenresEndpoints();
 await app.MigrateDatabaseAsync();
 app.Run();
